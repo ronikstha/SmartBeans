@@ -1,127 +1,229 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TextInput, TouchableOpacity, Image, Dimensions, TouchableOpacityComponent } from 'react-native';
+import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
-const LoginScreen = ({navigation}) => {
+import { AuthContext } from '../components/Context';
+import Users from '../components/users';
+
+const LoginScreen = ({ navigation }) => {
 
   const [data, setData] = React.useState({
-    username: '',
-    password: '',
-    check_textInputChange: false,
-    secureTextEntry: true,
-    isValidUser: true,
-    isValidPassword: true,
-});
-
-const textInputChange = (val) => {
-  if( val.trim().length >= 4 ) {
-      setData({
-          ...data,
-          username: val,
-          check_textInputChange: true,
-          isValidUser: true
-      });
-  } else {
-      setData({
-          ...data,
-          username: val,
-          check_textInputChange: false,
-          isValidUser: false
-      });
-  }
+     userName:'',
+     password:'',
+     check_textInputChange:false,
+     secureTextEntry: true,
+     isValidUser: true,
+     isValidPassword: true,
+  });
+  
+  const { signIn } = React.useContext(AuthContext);
+   
+  const textInputChange = (val) => {
+    if( val.trim().length >= 4 ) {
+        setData({
+            ...data,
+            userName: val,
+            check_textInputChange: true,
+            isValidUser: true
+        });
+    } else {
+        setData({
+            ...data,
+            userName: val,
+            check_textInputChange: false,
+            isValidUser: false
+        });
+    }
 }
 
 const handlePasswordChange = (val) => {
-  if( val.trim().length >= 8 ) {
-      setData({
-          ...data,
-          password: val,
-          isValidPassword: true
-      });
-  } else {
-      setData({
-          ...data,
-          password: val,
-          isValidPassword: false
-      });
-  }
+    if( val.trim().length >= 8 ) {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: true
+        });
+    } else {
+        setData({
+            ...data,
+            password: val,
+            isValidPassword: false
+        });
+    }
 }
 
-    return (
-      <View style={styles.container}>
-        <Image source={require('../assets/images/cover.png')} style={styles.logo} />
-        <View style={styles.inputView} >
-          <TextInput 
-            style={styles.inputText}
-            placeholder="Email..."
-            autoCapitalize="none"
-            placeholderTextColor="#003f5c"
-            onChangeText={text => textInputChange(val)} />
-        </View>
-        <View style={styles.inputView} >
-          <TextInput
-            secureTextEntry = {data.secureTextEntry ? true : false }
-            style={styles.inputText}
-            placeholder="Password..."
-            placeholderTextColor="#003f5c"
-            onChangeText={(val) => handlePasswordChange(val)} />
-        </View>
+const updateSecureTextEntry = () => {
+    setData({
+        ...data,
+        secureTextEntry: !data.secureTextEntry
+    });
+}
 
-        <TouchableOpacity style={styles.loginBtn}  >
-          <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('RegisterScreen')}>
-          <Text style={styles.register}>Don't have a Account yet? Click Here...</Text>
-        </TouchableOpacity>
-      </View>
-    );
+const handleValidUser = (val) => {
+    if( val.trim().length >= 4 ) {
+        setData({
+            ...data,
+            isValidUser: true
+        });
+    } else {
+        setData({
+            ...data,
+            isValidUser: false
+        });
+    }
+}
+
+const loginHandle = (userName, password) => {
+
+  const foundUser = Users.filter( item => {
+      return userName == item.userName && password == item.password;
+  } );
+
+  if ( data.userName.length == 0 || data.password.length == 0 ) {
+      Alert.alert('Wrong Input!', 'Email or password field cannot be empty.', [
+          {text: 'Okay'}
+      ]);
+      return;
   }
 
-  export default LoginScreen;
+  if ( foundUser.length == 0 ) {
+      Alert.alert('Invalid User!', 'Email or password is incorrect.', [
+          {text: 'Okay'}
+      ]);
+      return;
+  }
+  signIn(foundUser);
+}
+
+
+
+  return (
+      <View style={styles.container}>
+        <View style={styles.header}>
+          <Text style={styles.text_header}>Welcome!</Text>
+        </View>
+        <View style={styles.footer}>
+          <Text style={styles.text_footer}>Username</Text>
+          <View style={styles.action}>
+            <FontAwesome name="user-o" color="#05375a" size={20}/>
+            <TextInput 
+            placeholder="Your Username" 
+            style={styles.textInput} 
+            autoCapitalize="none"
+            onChangeText={(val) => textInputChange(val)}
+            />
+            {data.check_textInputChange ?
+            <FontAwesome name="check-circle" color="green" size={20}/>
+            : null}
+          </View>
+          { data.isValidUser ? null :          
+            <Text style={styles.errorMsg}>Username must be 4 characters long.</Text>
+            }
+
+          <Text style={styles.text_footer, {marginTop: 35}  }>Password</Text>
+          <View style={styles.action}>
+            <FontAwesome name="lock" color="#05375a" size={20}/>
+            <TextInput 
+            placeholder="Your Password" 
+            style={styles.textInput} 
+            autoCapitalize="none" 
+            secureTextEntry={data.secureTextEntry ? true : false}
+            onChangeText={(val) => handlePasswordChange(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ?  
+            <FontAwesome name="eye-slash" color="grey" size={20}/>
+            :
+            <FontAwesome name="eye-slash" color="green" size={20}/>
+              }
+            </TouchableOpacity>
+          </View>
+          { data.isValidPassword ? null : 
+            <Text style={styles.errorMsg}>Password must be 8 characters long.</Text>
+            }
+          <View style={styles.button}>
+              <TouchableOpacity style={[styles.signIn, {backgroundColor: '#FF914D'}]} onPress={() => {loginHandle( data.username, data.password )}}>
+                  <Text style={[styles.textSign, {color: '#fff'}]}>Sign In</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.signIn, {marginTop:15, borderColor:'#FF914D', borderWidth:2}]} onPress={() => navigation.navigate('RegisterScreen')}>
+                  <Text style={[styles.textSign, {color:'#FF914D'}]}>Register Now!</Text>
+              </TouchableOpacity>
+          </View>
+        </View>
+        
+      </View>
+  );
+}
+
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#FF914D',
-    alignItems: 'center',
-    justifyContent: 'center',
+    flex: 1, 
+    backgroundColor: '#FF914D'
   },
-  logo: {
-    marginTop: 0
+  header: {
+      flex: 1,
+      justifyContent: 'flex-end',
+      paddingHorizontal: 20,
+      paddingBottom: 50
   },
-  inputView: {
-    width: "80%",
-    backgroundColor: "#FFFFFF",
-    borderRadius: 25,
-    height: 50,
-    marginBottom: 20,
-    justifyContent: "center",
-    padding: 20,
+  footer: {
+      flex: 3,
+      backgroundColor: '#fff',
+      borderTopLeftRadius: 30,
+      borderTopRightRadius: 30,
+      paddingHorizontal: 20,
+      paddingVertical: 30
   },
-  inputText: {
-    height: 55,
-    color: "black"
+  text_header: {
+      color: '#fff',
+      fontWeight: 'bold',
+      fontSize: 30
   },
-  forgot: {
-    color: "white",
-    fontSize: 15
+  text_footer: {
+      color: '#05375a',
+      fontSize: 18
   },
-  register:{
-    marginTop: 20,
-    color: "white",
-    fontSize: 17
+  action: {
+      flexDirection: 'row',
+      marginTop: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#f2f2f2',
+      paddingBottom: 5
   },
-  loginBtn: {
-    width: "80%",
-    backgroundColor: "#d1001c",
-    borderRadius: 25,
-    height: 50,
-    alignItems: "center",
-    justifyContent: "center",
-    marginTop: 40,
-    marginBottom: 10
+  actionError: {
+      flexDirection: 'row',
+      marginTop: 10,
+      borderBottomWidth: 1,
+      borderBottomColor: '#FF0000',
+      paddingBottom: 5
   },
-  loginText: {
-    color: "white",
-    fontSize: 20
+  textInput: {
+      flex: 1,
+      marginTop: Platform.OS === 'ios' ? 0 : -12,
+      paddingLeft: 10,
+      color: '#05375a',
+  },
+  errorMsg: {
+      color: '#FF0000',
+      fontSize: 14,
+  },
+  button: {
+      alignItems: 'center',
+      marginTop: 50
+  },
+  signIn: {
+      width: '100%',
+      height: 50,
+      justifyContent: 'center',
+      alignItems: 'center',
+      borderRadius: 10,
+      
+  },
+  textSign: {
+      fontSize: 18,
+      fontWeight: 'bold',
+      
   }
 });

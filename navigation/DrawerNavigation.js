@@ -6,7 +6,12 @@ import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switc
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import HistoryScreen from '../screens/HistoryScreen';
 
+import { AuthContext } from '../components/Context';
+
 export function DrawerContent(props) {
+
+  const { signOut } = React.useContext(AuthContext);
+   
     return(
         <View style={{flex:1}}>
             <DrawerContentScrollView { ...props}>
@@ -68,7 +73,7 @@ export function DrawerContent(props) {
                     <Icon name="exit-to-app" color={color} size={size} />
                 )}
                 label="Sign Out"
-                onPress={() => {}} />               
+                onPress={() => {signOut()}} />               
             </Drawer.Section>
         </View>
     )
