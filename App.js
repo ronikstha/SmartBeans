@@ -134,6 +134,7 @@ if( loginState.isLoading ) {
       { loginState.userToken !== null ? (
               <Drawer.Navigator drawerContent={props => <DrawerContent { ...props } /> }>
               <Drawer.Screen name="Menu" component={MainTabScreen} />
+              <Drawer.Screen name="Profile" component={ProfileScreen} />
               <Drawer.Screen name="History" component={HistoryScreen} />
               <Drawer.Screen name="Promotion" component={PromotionScreen} />
               <Drawer.Screen name="Support" component={SupportScreen} />
@@ -145,6 +146,7 @@ if( loginState.isLoading ) {
     </AuthContext.Provider>
   );
 }
+
 
 export default App;
 

@@ -32,7 +32,7 @@ const MainTabScreen = () => (
           ),
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Profile"
         component={ProfileStackScreen}
         options={{
@@ -41,7 +41,7 @@ const MainTabScreen = () => (
             <MaterialCommunityIcons name="account" color={color} size={29} />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Cart"
         component={CartStackScreen}
