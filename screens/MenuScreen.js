@@ -6,54 +6,59 @@ import {
   FlatList,
   Image,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  ScrollView
 } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
-import { NavigationContainer } from "@react-navigation/native";
+
+var data =
+[
+  {
+    name:'Cappucinno',
+    image: require("../assets/images/cap.png"),
+    price: "$12"
+},
+{
+    name:'Latte',
+    image: require("../assets/images/latte.png"),
+    price: "$15"
+},
+{
+    name:'Long Black',
+    image: require("../assets/images/black.png"),
+    price: "$20"
+},
+{
+    name:'Tea',
+    image: require("../assets/images/tea.png"),
+    price: "$12"
+},
+{
+    name:'Iced Latte',
+    image: require("../assets/images/iced-latte.png"),
+    price: "$13"
+},
+{
+  name:'Iced Latte',
+  image: require("../assets/images/iced-latte.png"),
+  price: "$13"
+},
+]
 
 export default class MenuScreen extends React.Component {
 
   constructor(props){
     super(props);
     this.state={
-      data:[
-        {
-          name:'Cappucinno',
-          image: require("../assets/images/cap.png"),
-          price: "$12"
-      },
-      {
-          name:'Latte',
-          image: require("../assets/images/latte.png"),
-          price: "$15"
-      },
-      {
-          name:'Long Black',
-          image: require("../assets/images/black.png"),
-          price: "$20"
-      },
-      {
-          name:'Tea',
-          image: require("../assets/images/tea.png"),
-          price: "$12"
-      },
-      {
-          name:'Iced Latte',
-          image: require("../assets/images/iced-latte.png"),
-          price: "$13"
-      },
-      {
-        name:'Iced Latte',
-        image: require("../assets/images/iced-latte.png"),
-        price: "$13"
-    },
-      ]
+      data: data,
+      data_temp : data,
+      search : ''
     }
   }
 
-  
+
   
   renderItem = ({item}) => {
     return(
@@ -78,33 +83,44 @@ export default class MenuScreen extends React.Component {
              </View>
            </View>
         </View>
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Detail', { image: item.image,
+            price: item.price,
+            name: item.name})}>
             <AntDesign name="arrowright" color="red" size={25}/>
         </TouchableOpacity>
-
-        {/* <TouchableOpacity 
-          onPress={()=>this.props.props.navigation.navigate("DetailScreen",{
-            image: item.image,
-            price: item.price,
-            name: item.name
-          })}
-          style={styles.button}>
-              <AntDesign 
-                name="arrowright"
-                color="green"
-                size={15}
-              />
-          </TouchableOpacity> */}
-
       </LinearGradient>
     )
   }
-
+ 
+  _search(text){
+     let data = [];
+     this.state.data_temp.map(function(value){
+       if(value.name.indexOf(text) > -1) {
+         data.push(value);
+       }
+     });
+     this.setState({
+       data:data,
+       search:text
+     })
+  } 
 
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.container}>  
+        <View style={styles.section}>
+          <TextInput
+          placeholder="Search.."
+          style={{flex:1, marginLeft:10, text:"black"}}
+          value={this.state.search}
+          onChangeText={(text) => this._search(text)}
+          />
+          <TouchableOpacity>
+          <Ionicons name="ios-search" color="gray" size={20}/>
+          </TouchableOpacity>
+        </View>
+        <ScrollView>
         <View style={styles.flatlist}>
            <FlatList
             data={this.state.data}
@@ -113,6 +129,7 @@ export default class MenuScreen extends React.Component {
             showsVerticalScrollIndicator={false}
             />
         </View>
+        </ScrollView>
       </View>
     );
   }
@@ -193,6 +210,8 @@ const styles = StyleSheet.create({
     paddingHorizontal:10,
     borderRadius:100,
     backgroundColor:'#f2f2f2',
-    marginTop:10
+    marginTop:10,
+    marginLeft:20,
+    marginRight:20,
   }
 });

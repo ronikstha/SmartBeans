@@ -16,6 +16,7 @@ import { AsyncStorage } from 'react-native';
 import HistoryScreen from './screens/HistoryScreen';
 import PromotionScreen from './screens/PromotionScreen';
 import SupportScreen from './screens/SupportScreen';
+import DetailScreen from './screens/DetailScreen'
 
 import LoginScreen from './screens/LoginScreen';
 import RegisterScreen from './screens/RegisterScreen';
@@ -138,6 +139,7 @@ if( loginState.isLoading ) {
               <Drawer.Screen name="History" component={HistoryScreen} />
               <Drawer.Screen name="Promotion" component={PromotionScreen} />
               <Drawer.Screen name="Support" component={SupportScreen} />
+              <Drawer.Screen name="Detail" component={DetailScreen} />
             </Drawer.Navigator> 
       )
         :   <AuthStackScreen />
