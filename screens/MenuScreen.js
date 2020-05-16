@@ -18,32 +18,32 @@ var data =
   {
     name:'Cappucinno',
     image: require("../assets/images/cap.png"),
-    price: "$12"
+    price: "4.5"
 },
 {
     name:'Latte',
     image: require("../assets/images/latte.png"),
-    price: "$15"
+    price: "$4.5"
 },
 {
     name:'Long Black',
     image: require("../assets/images/black.png"),
-    price: "$20"
+    price: "$3.5"
 },
 {
     name:'Tea',
     image: require("../assets/images/tea.png"),
-    price: "$12"
+    price: "$3.5"
 },
 {
     name:'Iced Latte',
     image: require("../assets/images/iced-latte.png"),
-    price: "$13"
+    price: "$5.5"
 },
 {
   name:'Iced Latte',
   image: require("../assets/images/iced-latte.png"),
-  price: "$13"
+  price: "$5.5"
 },
 ]
 
@@ -64,7 +64,7 @@ export default class MenuScreen extends React.Component {
     return(
       <LinearGradient 
       colors={['#FFBD90','#FFE4D1']}
-      start={{x:0, y:1}} end={{x:1,y:0}}
+      start={{x:1, y:1}} end={{x:0,y:0}}
       style={styles.item}
       >
         <View style={styles.image_container}>
