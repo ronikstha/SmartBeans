@@ -4,7 +4,6 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import { Avatar, Title, Caption, Paragraph, Drawer, Text, TouchableRipple, Switch} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-import HistoryScreen from '../screens/HistoryScreen';
 
 import { AuthContext } from '../components/Context';
 
@@ -34,7 +33,7 @@ export function DrawerContent(props) {
                                    <Icon name="home-outline" color={color} size={size} />
                                )}
                                label="Home"
-                               onPress={() => {props.navigation.navigate('Home')}}
+                               onPress={() => {props.navigation.navigate('Menu')}}
                             />
                             <DrawerItem 
                                icon={({color,size}) =>(

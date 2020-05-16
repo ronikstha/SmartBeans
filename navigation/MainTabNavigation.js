@@ -7,11 +7,11 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import MenuScreen from '../screens/MenuScreen';
-import ProfileScreen from '../screens/ProfileScreen';
 import CartScreen from '../screens/CartScreen';
+import DetailStackScreen from '../App';
+
 
 const HomeStack = createStackNavigator();
-const ProfileStack = createStackNavigator();
 const CartStack = createStackNavigator();
 
 const Tab = createMaterialBottomTabNavigator();
@@ -23,7 +23,7 @@ const MainTabScreen = () => (
       barStyle={{ backgroundColor: '#FF914D' }}
     >
       <Tab.Screen
-        name="Home"
+        name="Menu"
         component={HomeStackScreen}
         options={{
           tabBarLabel: 'Cafe Menu',
@@ -32,16 +32,7 @@ const MainTabScreen = () => (
           ),
         }}
       />
-      {/* <Tab.Screen
-        name="Profile"
-        component={ProfileStackScreen}
-        options={{
-          tabBarLabel: 'Profile',
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="account" color={color} size={29} />
-          ),
-        }}
-      /> */}
+
       <Tab.Screen
         name="Cart"
         component={CartStackScreen}
@@ -77,23 +68,7 @@ const HomeStackScreen = ({ navigation }) => (
     </HomeStack.Navigator>
   );
   
-  const ProfileStackScreen = ({ navigation }) => (
-    <ProfileStack.Navigator screenOptions={{
-        headerStyle: {
-        backgroundColor: '#FF914D',
-      },
-      headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontWeight: 'bold'
-      }
-    }}>
-      <ProfileStack.Screen name="Home" component={ProfileScreen} options={{ title: 'Cafe User Profile',
-    headerLeft: () => (
-      <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
-    )
-    }} />
-    </ProfileStack.Navigator>
-  );
+
   
   const CartStackScreen = ({ navigation }) => (
     <CartStack.Navigator screenOptions={{

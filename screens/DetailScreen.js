@@ -7,6 +7,8 @@ import { Button } from 'react-native-paper';
 
 export default class DetailScreen extends React.Component {
 
+
+   
   render() {
     return (
       <View style={styles.container}>

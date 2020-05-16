@@ -17,12 +17,10 @@ import HistoryScreen from './screens/HistoryScreen';
 import PromotionScreen from './screens/PromotionScreen';
 import SupportScreen from './screens/SupportScreen';
 import DetailScreen from './screens/DetailScreen'
-
-import LoginScreen from './screens/LoginScreen';
-import RegisterScreen from './screens/RegisterScreen';
+import ProfileScreen from './screens/ProfileScreen';
 import MenuScreen from './screens/MenuScreen';
-import ProfileScreen from './screens/ProfileScreen'
-import HistoryStackScreen from './navigation/DrawerNavigation';
+
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 const Drawer = createDrawerNavigator();
@@ -134,12 +132,12 @@ if( loginState.isLoading ) {
     <NavigationContainer>
       { loginState.userToken !== null ? (
               <Drawer.Navigator drawerContent={props => <DrawerContent { ...props } /> }>
-              <Drawer.Screen name="Menu" component={MainTabScreen} />
-              <Drawer.Screen name="Profile" component={ProfileScreen} />
-              <Drawer.Screen name="History" component={HistoryScreen} />
-              <Drawer.Screen name="Promotion" component={PromotionScreen} />
-              <Drawer.Screen name="Support" component={SupportScreen} />
-              <Drawer.Screen name="Detail" component={DetailScreen} />
+              <Drawer.Screen name="Home" component={MainTabScreen} />
+              <Drawer.Screen name="Profile" component={ProfileStackScreen} />
+              <Drawer.Screen name="History" component={HistoryStackScreen} />
+              <Drawer.Screen name="Promotion" component={PromotionStackScreen} />
+              <Drawer.Screen name="Support" component={SupportStackScreen} />
+              <Drawer.Screen name="Detail" component={DetailStackScreen} />
             </Drawer.Navigator> 
       )
         :   <AuthStackScreen />
@@ -151,6 +149,124 @@ if( loginState.isLoading ) {
 
 
 export default App;
+
+
+// To create the header for all pages
+const MenuStack = createStackNavigator();
+const ProfileStack = createStackNavigator();
+const HistoryStack = createStackNavigator();
+const PromotionStack = createStackNavigator();
+const SupportStack = createStackNavigator();
+const DetailStack = createStackNavigator();
+
+const MenuStackScreen = ({ navigation }) => (
+  <MenuStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <MenuStack.Screen name="Menu" component={MenuScreen} options={{ title: 'Cafe Menu',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </MenuStack.Navigator>
+);
+
+
+const ProfileStackScreen = ({ navigation }) => (
+  <ProfileStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Cafe User Profile',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </ProfileStack.Navigator>
+);
+
+const HistoryStackScreen = ({ navigation }) => (
+  <HistoryStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <HistoryStack.Screen name="History" component={HistoryScreen} options={{ title: 'Order History',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </HistoryStack.Navigator>
+);
+
+const PromotionStackScreen = ({ navigation }) => (
+  <PromotionStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <PromotionStack.Screen name="Promotion" component={PromotionScreen} options={{ title: 'Promotions',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </PromotionStack.Navigator>
+);
+
+const SupportStackScreen = ({ navigation }) => (
+  <SupportStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <SupportStack.Screen name="Support" component={SupportScreen} options={{ title: 'Support',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </SupportStack.Navigator>
+);
+
+const DetailStackScreen = ({ navigation }) => (
+  <DetailStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <DetailStack.Screen name="Detail" component={DetailScreen} options={{ title: 'Detail View',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </DetailStack.Navigator>
+);
 
 
 const styles = StyleSheet.create({
