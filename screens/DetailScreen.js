@@ -5,11 +5,14 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from 'expo-linear-gradient';
 import { Button } from 'react-native-paper';
 
-export default class DetailScreen extends React.Component {
 
 
-   
+
+ 
+export default class DetailScreen extends React.Component  {
+  
   render() {
+
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -23,6 +26,10 @@ export default class DetailScreen extends React.Component {
               source={require('../assets/images/tea.png')} 
               style={styles.image}
            />
+           {/* <Image 
+                source={this.props.navigation.getParam('image')}
+                style={styles.image}
+              /> */}
         </View>
         <View style={styles.back}>
           <Ionicons 
@@ -37,12 +44,20 @@ export default class DetailScreen extends React.Component {
           <View style={styles.status}>
             <Text style={{color:'#FF914D'}}>Available</Text>
           </View>
-          <Text style={styles.textPrice}>$12</Text>
+          <Text style={styles.textPrice}>$4.5</Text>
           <Text style={styles.textName}>Cappacino</Text>
-          <Text style={styles.textDetal}>Cappacino is hot frothy milk coffee. It has alot of foam in it. </Text>
+          <Text style={styles.textDetail}>Cappacino is hot frothy milk coffee. It has alot of foam in it. </Text>
 
-          <TouchableOpacity style={{backgroundColor:"#FF914D", justifyContent:'center', alignItems:'center', marginTop:40, paddingVertical:10, borderRadius:50}}>
-            <Text style={styles.textOrder}>ORDER NOW</Text>
+          {/* <Text style={styles.textPrice}>{this.props.navigation.state.params.price}</Text>
+          <Text numberOfLines={2} style={styles.textName}>{this.props.navigation.state.params.name.toUpperCase()}</Text>
+          <Text  style={styles.textDetail}>The template details auto text code displays the complete template details, including attribute details and metric details.</Text>
+  */}
+
+          <TouchableOpacity 
+          style={{backgroundColor:"#FF914D", justifyContent:'center', alignItems:'center', marginTop:40, paddingVertical:10, borderRadius:50}}
+          onPress={()=>this.onClickAddCart(item)}
+          >
+            <Text style={styles.textOrder}>Add to Cart</Text>
             </TouchableOpacity>
         </View>
 

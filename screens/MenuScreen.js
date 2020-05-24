@@ -7,18 +7,20 @@ import {
   Image,
   TouchableOpacity,
   TextInput,
-  ScrollView
+  ScrollView,
+  TouchableOpacityBase
 } from "react-native";
 import { LinearGradient } from 'expo-linear-gradient';
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
+import { AsyncStorage } from 'react-native';
 
-var data =
+export var data =
 [
   {
     name:'Cappucinno',
     image: require("../assets/images/cap.png"),
-    price: "4.5"
+    price: "$4.5"
 },
 {
     name:'Latte',
@@ -57,9 +59,35 @@ export default class MenuScreen extends React.Component {
       search : ''
     }
   }
-
-
   
+  onClickAddCart(data){
+
+    const itemcart = {
+      name : data,
+      cart_quantity:  1,
+      cart_price: data.price,
+      cart_image: data.image
+    }
+ 
+    AsyncStorage.getItem('cart').then((datacart)=>{
+        if (datacart !== null) {
+          // We have data!!
+          const cart = JSON.parse(datacart)
+          cart.push(itemcart)
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+        }
+        else{
+          const cart  = []
+          cart.push(itemcart)
+          AsyncStorage.setItem('cart',JSON.stringify(cart));
+        }
+        alert("Added to Cart")
+      })
+      .catch((err)=>{
+        alert(err)
+      })
+  }
+
   renderItem = ({item}) => {
     return(
       <LinearGradient 
@@ -82,6 +110,13 @@ export default class MenuScreen extends React.Component {
                <Text style={styles.textPrice}>{item.price}</Text>
              </View>
            </View>
+           <TouchableOpacity style={styles.cart_button}
+             onPress={()=>this.onClickAddCart(item)}
+           >
+              <Text style={styles.textPrice}>Add to Cart</Text>
+              <View style={{width:10}} />
+              <Ionicons name="ios-add-circle" color="white" size={20}></Ionicons>
+           </TouchableOpacity>
         </View>
         <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate('Detail', { image: item.image,
             price: item.price,
@@ -91,6 +126,7 @@ export default class MenuScreen extends React.Component {
       </LinearGradient>
     )
   }
+  
  
   _search(text){
      let data = [];
@@ -145,6 +181,15 @@ const styles = StyleSheet.create({
   flatList: {
     flex:1,
     marginTop:10
+  },
+  cart_button: {
+              marginTop: 10,
+              backgroundColor:'#FF914D',
+              flexDirection:'row',
+              alignItems:'center',
+              justifyContent:"center",
+              borderRadius:5,
+              padding: 4
   },
   item: {
     flex:1,

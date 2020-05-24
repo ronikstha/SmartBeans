@@ -1,20 +1,93 @@
 import * as React from 'react';
-import { Image, Platform, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, Dimensions, TextInput } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-
+import Ionicons from "react-native-vector-icons/Ionicons";
+import { AsyncStorage } from 'react-native';
+var { width } = Dimensions.get("window")
 
 export default class CartScreen extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      dataCart: [],
+    };
+  }
+
+  componentDidMount()
+  {
+    AsyncStorage.getItem('cart').then((cart)=>{
+      if (cart !== null) {
+        // We have data!!
+        const cartfood = JSON.parse(cart)
+        this.setState({dataCart:cartfood})
+      }
+    })
+    .catch((err)=>{
+      alert(err)
+    })
+  }
+
   render() {
     return (
-      <ScrollView >
-          <View><Text> This will be our Cart </Text></View>
-      </ScrollView>
+      <View style={{ flex: 1, alignItems: 'center' }}>
+         <ScrollView>
+         {
+           this.state.dataCart.map((item)=>{
+               return(
+                <View style={{width:width-20,margin:10,backgroundColor:'transparent', flexDirection:'row', borderBottomWidth:2, borderColor:"#cccccc", paddingBottom:10}}>
+                <Image resizeMode={"contain"} style={{width:width/3,height:width/3}} source={require('../assets/images/cap.png')} />
+                   <View style={{flex:1, backgroundColor:'transparent', padding:10, justifyContent:"space-between"}}>
+                     <View>
+                       <Text style={{fontWeight:"bold", fontSize:20}}>Cappaccino</Text>
+                       <Text>Description</Text>
+                     </View>
+                     <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                       <Text style={{fontWeight:'bold',color:"#FF914D",fontSize:20}}>$4.5</Text>
+                       <View style={{flexDirection:'row', alignItems:'center'}}>
+                         <TouchableOpacity>
+                           <Ionicons name="ios-remove-circle" size={30} color={"#FF914D"} />
+                         </TouchableOpacity>
+                         <Text style={{paddingHorizontal:8, fontWeight:'bold'}}>5</Text>
+                         <TouchableOpacity>
+                           <Ionicons name="ios-add-circle" size={30} color={"#FF914D"} />
+                         </TouchableOpacity>
+                       </View>
+                     </View>
+                   </View>
+                 </View>
+               )
+           })
+         }  
+         </ScrollView>
+
+         
+
+          <View style={{ height: 20 }} />
+          <TouchableOpacity style={{
+              backgroundColor: "#FF914D",
+              alignItems: 'center',
+              padding: 10,
+              width: width-40,
+              borderRadius: 5
+              }}>
+              <Text style={{
+                fontSize: 24,
+                fontWeight: "bold",
+                color: 'white'
+              }}>
+                CHECKOUT
+              </Text>
+            </TouchableOpacity>
+            <View style={{ height: 10 }} />
+        </View>
     );
   }
+
+  
 }
 
 
 const styles = StyleSheet.create({
- 
+
 });
