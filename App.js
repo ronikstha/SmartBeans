@@ -152,31 +152,11 @@ export default App;
 
 
 // To create the header for all pages
-const MenuStack = createStackNavigator();
 const ProfileStack = createStackNavigator();
 const HistoryStack = createStackNavigator();
 const PromotionStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 const DetailStack = createStackNavigator();
-
-const MenuStackScreen = ({ navigation }) => (
-  <MenuStack.Navigator screenOptions={{
-      headerStyle: {
-      backgroundColor: '#FF914D',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }}>
-    <MenuStack.Screen name="Menu" component={MenuScreen} options={{ title: 'Cafe Menu',
-  headerLeft: () => (
-    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
-  )
-  }} />
-  </MenuStack.Navigator>
-);
-
 
 const ProfileStackScreen = ({ navigation }) => (
   <ProfileStack.Navigator screenOptions={{
@@ -188,7 +168,7 @@ const ProfileStackScreen = ({ navigation }) => (
       fontWeight: 'bold'
     }
   }}>
-    <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Cafe User Profile',
+    <ProfileStack.Screen name="Profile" component={ProfileScreen} options={{ title: 'Profile',
   headerLeft: () => (
     <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
   )

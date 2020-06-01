@@ -59,34 +59,39 @@ export default class MenuScreen extends React.Component {
       search : ''
     }
   }
-  
-  onClickAddCart(data){
 
-    const itemcart = {
-      name : data,
-      cart_quantity:  1,
-      cart_price: data.price,
-      cart_image: data.image
-    }
- 
-    AsyncStorage.getItem('cart').then((datacart)=>{
-        if (datacart !== null) {
-          // We have data!!
-          const cart = JSON.parse(datacart)
-          cart.push(itemcart)
-          AsyncStorage.setItem('cart',JSON.stringify(cart));
-        }
-        else{
-          const cart  = []
-          cart.push(itemcart)
-          AsyncStorage.setItem('cart',JSON.stringify(cart));
-        }
-        alert("Added to Cart")
-      })
-      .catch((err)=>{
-        alert(err)
-      })
+
+  // food: data,
+  //    quantity:  1,
+  //    price: data.price
+
+ onClickAddCart(cart_data){
+
+  const itemcart = {
+    data : cart_data,
+    quantity:1,
+    price: cart_data.price
   }
+    
+    AsyncStorage.getItem("cart").then((datacart)=>{
+       
+      if (datacart!== null) {
+        const cart = JSON.parse(datacart)
+        cart.push(itemcart)
+        AsyncStorage.setItem("cart", JSON.stringify(cart))
+      }
+      else{
+        const cart = []
+        cart.push(itemcart)
+        AsyncStorage.setItem("cart", JSON.stringify(cart))
+      } 
+      alert("Successfully added")
+    })
+    .catch((error)=>{
+      alert(error)
+    })
+ }
+
 
   renderItem = ({item}) => {
     return(
@@ -148,7 +153,7 @@ export default class MenuScreen extends React.Component {
         <View style={styles.section}>
           <TextInput
           placeholder="Search.."
-          style={{flex:1, marginLeft:10, text:"black"}}
+          style={{flex:1, marginLeft:10, color:"black"}}
           value={this.state.search}
           onChangeText={(text) => this._search(text)}
           />

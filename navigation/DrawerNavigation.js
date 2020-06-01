@@ -51,7 +51,7 @@ export function DrawerContent(props) {
                             />
                             <DrawerItem 
                                icon={({color,size}) =>(
-                                   <Icon name="money-outline" color={color} size={size} />
+                                   <Icon name="cash" color={color} size={size} />
                                )}
                                label="Promotions"
                                onPress={() => {props.navigation.navigate('Promotion')}}

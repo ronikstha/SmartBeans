@@ -26,7 +26,7 @@ const MainTabScreen = () => (
         name="Menu"
         component={HomeStackScreen}
         options={{
-          tabBarLabel: 'Cafe Menu',
+          tabBarLabel: 'Menu',
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="home" color={color} size={29} />
           ),
@@ -60,7 +60,7 @@ const HomeStackScreen = ({ navigation }) => (
       }
     }}>
       <HomeStack.Screen name="Home" component={MenuScreen} options={{ 
-        title: 'Cafe Menu',
+        title: 'Menu',
         headerLeft: () => (
           <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
         ) 
@@ -80,7 +80,7 @@ const HomeStackScreen = ({ navigation }) => (
         fontWeight: 'bold'
       }
     }}>
-      <CartStack.Screen name="Cart" component={CartScreen} options={{ title: 'Cafe User Cart',
+      <CartStack.Screen name="Cart" component={CartScreen} options={{ title: 'Order Cart',
     headerLeft: () => (
       <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
     )
