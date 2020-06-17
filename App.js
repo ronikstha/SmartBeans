@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, View, Text, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
-import { ActivityIndicator } from 'react-native-paper';
+import { ActivityIndicator, Menu } from 'react-native-paper';
 
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator} from '@react-navigation/drawer';
@@ -13,14 +13,14 @@ import AuthStackScreen from './navigation/AuthStackNavigation';
 import { AuthContext } from './components/Context';
 import { AsyncStorage } from 'react-native';
 
-import HistoryScreen from './screens/HistoryScreen';
-import PromotionScreen from './screens/PromotionScreen';
+import Wallet from './screens/Wallet';
 import SupportScreen from './screens/SupportScreen';
 import DetailScreen from './screens/DetailScreen'
 import ProfileScreen from './screens/ProfileScreen';
 import MenuScreen from './screens/MenuScreen';
 
 import Icon from 'react-native-vector-icons/Ionicons';
+import CheckoutScreen from './screens/CheckoutScreen';
 
 
 const Drawer = createDrawerNavigator();
@@ -134,10 +134,10 @@ if( loginState.isLoading ) {
               <Drawer.Navigator drawerContent={props => <DrawerContent { ...props } /> }>
               <Drawer.Screen name="Home" component={MainTabScreen} />
               <Drawer.Screen name="Profile" component={ProfileStackScreen} />
-              <Drawer.Screen name="History" component={HistoryStackScreen} />
-              <Drawer.Screen name="Promotion" component={PromotionStackScreen} />
+              <Drawer.Screen name="Wallet" component={WalletStackScreen} />
               <Drawer.Screen name="Support" component={SupportStackScreen} />
               <Drawer.Screen name="Detail" component={DetailStackScreen} />
+              <Drawer.Screen name="Checkout" component={CheckoutStackScreen}/> 
             </Drawer.Navigator> 
       )
         :   <AuthStackScreen />
@@ -153,10 +153,28 @@ export default App;
 
 // To create the header for all pages
 const ProfileStack = createStackNavigator();
-const HistoryStack = createStackNavigator();
-const PromotionStack = createStackNavigator();
+const WalletStack = createStackNavigator();
 const SupportStack = createStackNavigator();
 const DetailStack = createStackNavigator();
+const CheckoutStack = createStackNavigator();
+
+const CheckoutStackScreen = ({ navigation }) => (
+  <CheckoutStack.Navigator screenOptions={{
+      headerStyle: {
+      backgroundColor: '#FF914D',
+    },
+    headerTintColor: '#fff',
+    headerTitleStyle: {
+      fontWeight: 'bold'
+    }
+  }}>
+    <CheckoutStack.Screen name="Checkout" component={CheckoutScreen} options={{ title: 'Checkout',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  </CheckoutStack.Navigator>
+);
 
 const ProfileStackScreen = ({ navigation }) => (
   <ProfileStack.Navigator screenOptions={{
@@ -176,8 +194,8 @@ const ProfileStackScreen = ({ navigation }) => (
   </ProfileStack.Navigator>
 );
 
-const HistoryStackScreen = ({ navigation }) => (
-  <HistoryStack.Navigator screenOptions={{
+const WalletStackScreen = ({ navigation }) => (
+  <WalletStack.Navigator screenOptions={{
       headerStyle: {
       backgroundColor: '#FF914D',
     },
@@ -186,30 +204,12 @@ const HistoryStackScreen = ({ navigation }) => (
       fontWeight: 'bold'
     }
   }}>
-    <HistoryStack.Screen name="History" component={HistoryScreen} options={{ title: 'Order History',
+    <WalletStack.Screen name="Wallet" component={Wallet} options={{ title: 'Wallet',
   headerLeft: () => (
     <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
   )
   }} />
-  </HistoryStack.Navigator>
-);
-
-const PromotionStackScreen = ({ navigation }) => (
-  <PromotionStack.Navigator screenOptions={{
-      headerStyle: {
-      backgroundColor: '#FF914D',
-    },
-    headerTintColor: '#fff',
-    headerTitleStyle: {
-      fontWeight: 'bold'
-    }
-  }}>
-    <PromotionStack.Screen name="Promotion" component={PromotionScreen} options={{ title: 'Promotions',
-  headerLeft: () => (
-    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
-  )
-  }} />
-  </PromotionStack.Navigator>
+  </WalletStack.Navigator>
 );
 
 const SupportStackScreen = ({ navigation }) => (
@@ -241,6 +241,11 @@ const DetailStackScreen = ({ navigation }) => (
     }
   }}>
     <DetailStack.Screen name="Detail" component={DetailScreen} options={{ title: 'Detail View',
+  headerLeft: () => (
+    <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
+  )
+  }} />
+  <DetailStack.Screen name="Menu" component={MenuScreen} options={{ title: 'Detail Menu View',
   headerLeft: () => (
     <Icon.Button name="ios-menu" size={25} backgroundColor="#FF914D" onPress={() => navigation.openDrawer()}></Icon.Button>
   )

@@ -44,17 +44,10 @@ export function DrawerContent(props) {
                             />
                             <DrawerItem 
                                icon={({color,size}) =>(
-                                   <Icon name="account-check-outline" color={color} size={size} />
-                               )}
-                               label="Order History"
-                               onPress={() => {props.navigation.navigate('History')}}
-                            />
-                            <DrawerItem 
-                               icon={({color,size}) =>(
                                    <Icon name="cash" color={color} size={size} />
                                )}
-                               label="Promotions"
-                               onPress={() => {props.navigation.navigate('Promotion')}}
+                               label="Wallet"
+                               onPress={() => {props.navigation.navigate('Wallet')}}
                             />
                             <DrawerItem 
                                icon={({color,size}) =>(

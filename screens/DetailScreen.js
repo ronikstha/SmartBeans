@@ -1,9 +1,8 @@
 import * as React from 'react';
 import { Image, Platform, StyleSheet, Text, TouchableOpacity, View, ImageBackground, Dimensions, StatusBar } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { LinearGradient } from 'expo-linear-gradient';
-import { Button } from 'react-native-paper';
+
 
  
 export default class DetailScreen extends React.Component  {
@@ -13,7 +12,6 @@ export default class DetailScreen extends React.Component  {
   }
   
   render() {
-
     return (
       <View style={styles.container}>
         <StatusBar barStyle="light-content" />
@@ -23,14 +21,10 @@ export default class DetailScreen extends React.Component  {
       style={styles.header}
       >
         <View style={styles.image_container}>
-           {/* <Image 
-              source={image} 
-              style={styles.image}
-           /> */}
-           {/* <Image 
-                source={this.props.navigation.getParam('image')}
-                style={styles.image}
-              /> */}
+             <Image 
+                source={require("../assets/images/cap.png")}
+                 style={styles.image}
+              />  
         </View>
         <View style={styles.back}>
           <Ionicons 
@@ -45,14 +39,14 @@ export default class DetailScreen extends React.Component  {
           <View style={styles.status}>
             <Text style={{color:'#FF914D'}}>Available</Text>
           </View>
-          <Text style={styles.textPrice}>$4.5</Text>
-          <Text style={styles.textName}>Cappacino</Text>
+            <Text style={styles.textPrice}>$3.5</Text>
+           <Text style={styles.textName}>Cap</Text>
           <Text style={styles.textDetail}>Cappacino is hot frothy milk coffee. It has alot of foam in it. </Text>
 {/* 
-          <Text style={styles.textPrice}>{this.props.navigation.getParam('price')}</Text>
+          <Text style={styles.textPrice}>{this.props.navigation.state.params.price}</Text>
           <Text numberOfLines={2} style={styles.textName}>{this.props.navigation.state.params.name.toUpperCase()}</Text>
           <Text  style={styles.textDetail}>The template details auto text code displays the complete template details, including attribute details and metric details.</Text>
-  */}
+   */}
 
           <TouchableOpacity 
           style={{backgroundColor:"#FF914D", justifyContent:'center', alignItems:'center', marginTop:40, paddingVertical:10, borderRadius:50}}
@@ -89,14 +83,16 @@ const styles = StyleSheet.create({
   image_container: {
     width: height_image,
     height: height_image,
-    marginTop: height_image/3
+    marginTop: height_image/8,
+    marginRight:50
   },
   image: {
     width: 225,
     height: 225,
     borderWidth:5,
     borderColor:'white',
-    borderRadius: height_image/2
+    borderRadius: height_image/3,
+    
   },
   back:{
     position:'absolute',

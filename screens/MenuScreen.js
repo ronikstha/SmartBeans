@@ -15,7 +15,7 @@ import AntDesign from "react-native-vector-icons/AntDesign";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { AsyncStorage } from 'react-native';
 
-export var data =
+var data =
 [
   {
     name:'Cappucinno',
@@ -60,17 +60,16 @@ export default class MenuScreen extends React.Component {
     }
   }
 
-
   // food: data,
   //    quantity:  1,
   //    price: data.price
 
- onClickAddCart(cart_data){
+ onClickAddCart(data){
 
   const itemcart = {
-    data : cart_data,
+    food : data,
     quantity:1,
-    price: cart_data.price
+    price: data.price
   }
     
     AsyncStorage.getItem("cart").then((datacart)=>{

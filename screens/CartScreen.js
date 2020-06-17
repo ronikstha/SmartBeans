@@ -49,29 +49,40 @@ export default class CartScreen extends React.Component {
     }
   }
 
+  onLoadTotal()
+  {
+      var total = 0
+      const cart = this.state.dataCart
+
+      for (var i=0; i < cart.length; i++) {
+        total = total + (cart[i].price*cart[i].quantity)
+      }
+      return total
+  }
+
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
         <ScrollView>
-          {/* {
-            this.state.dataCart.map((item, i) => {
+          {
+            this.state.dataCart.map((item,i) => {
               return (
                 <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
                   <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={item.image} />
                   <View style={{ flex: 1, backgroundColor: 'trangraysparent', padding: 10, justifyContent: "space-between" }}>
                     <View>
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>aa</Text>
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>zaa</Text>
 
                       <Text>{JSON.stringify(item)}</Text>
                     </View>
                     <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
                       <Text style={{ fontWeight: 'bold', color: "#FF914D", fontSize: 20 }}>{item.price}</Text>
                       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress={()=>this.onChangeQual(i,false)}>
                           <Ionicons name="ios-remove-circle" size={30} color={"#FF914D"} />
                         </TouchableOpacity>
-                        <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>1</Text>
-                        <TouchableOpacity>
+                        <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>{item.quantity}</Text>
+                        <TouchableOpacity onPress={()=>this.onChangeQual(i,true)}>
                           <Ionicons name="ios-add-circle" size={30} color={"#FF914D"} />
                         </TouchableOpacity>
                       </View>
@@ -80,32 +91,18 @@ export default class CartScreen extends React.Component {
                 </View>
               )
             })
-          } */}
-          <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
-                  <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={require("../assets/images/cap.png")} />
-                  <View style={{ flex: 1, backgroundColor: 'trangraysparent', padding: 10, justifyContent: "space-between" }}>
-                    <View>
-              <Text style={{ fontWeight: "bold", fontSize: 20 }}>aa</Text>
-
-                      <Text>a</Text>
-                    </View>
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-                      <Text style={{ fontWeight: 'bold', color: "#FF914D", fontSize: 20 }}>22</Text>
-                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                        <TouchableOpacity>
-                          <Ionicons name="ios-remove-circle" size={30} color={"#FF914D"} />
-                        </TouchableOpacity>
-                        <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>1</Text>
-                        <TouchableOpacity>
-                          <Ionicons name="ios-add-circle" size={30} color={"#FF914D"} />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-                </View>
+          }
+          
         </ScrollView>
-        <View style={{ height: 20 }} />
-        <TouchableOpacity style={{
+        <View style={{ height:10 }} />
+
+        <Text dyle={{fontSize:20, color:"#FF914D" }}>Total: ${this.onLoadTotal()}</Text>
+
+        <View style={{ height: 10}} />
+
+        <TouchableOpacity 
+         onPress={() => this.props.navigation.navigate('Checkout')}
+         style={{
           backgroundColor: "#FF914D",
           alignItems: 'center',
           padding: 10,
