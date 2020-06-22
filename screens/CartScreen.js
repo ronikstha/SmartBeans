@@ -63,7 +63,7 @@ export default class CartScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, alignItems: 'center' }}>
-        <ScrollView>
+        {/* <ScrollView>
           {
             this.state.dataCart.map((item,i) => {
               return (
@@ -93,10 +93,35 @@ export default class CartScreen extends React.Component {
             })
           }
           
+        </ScrollView> */}
+        <ScrollView>
+                <View style={{ width: width - 20, margin: 10, backgroundColor: 'transparent', flexDirection: 'row', borderBottomWidth: 2, borderColor: "#cccccc", paddingBottom: 10 }}>
+                  <Image resizeMode={"contain"} style={{ width: width / 3, height: width / 3 }} source={require("../assets/images/cap.png")} />
+                  <View style={{ flex: 1, backgroundColor: 'trangraysparent', padding: 10, justifyContent: "space-between" }}>
+                    <View>
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>Cappacinno</Text>
+
+                      <Text>Cappacino is hot frothy milk coffee. It has alot of foam in it.</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+                      <Text style={{ fontWeight: 'bold', color: "#FF914D", fontSize: 20 }}>$4.5</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <TouchableOpacity onPress={()=>this.onChangeQual(i,false)}>
+                          <Ionicons name="ios-remove-circle" size={30} color={"#FF914D"} />
+                        </TouchableOpacity>
+                        <Text style={{ paddingHorizontal: 8, fontWeight: 'bold', fontSize: 18 }}>2</Text>
+                        <TouchableOpacity onPress={()=>this.onChangeQual(i,true)}>
+                          <Ionicons name="ios-add-circle" size={30} color={"#FF914D"} />
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                  </View>
+                </View>
         </ScrollView>
         <View style={{ height:10 }} />
 
-        <Text dyle={{fontSize:20, color:"#FF914D" }}>Total: ${this.onLoadTotal()}</Text>
+        {/* <Text dyle={{fontSize:20, color:"#FF914D" }}>Total: ${this.onLoadTotal()}</Text> */}
+        <Text dyle={{fontSize:20, color:"#FF914D" }}>Total: $ 9</Text>
 
         <View style={{ height: 10}} />
 

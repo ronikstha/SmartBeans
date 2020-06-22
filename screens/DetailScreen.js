@@ -11,6 +11,10 @@ export default class DetailScreen extends React.Component  {
     super(props)
   }
   
+  onClickAddCart() {
+    alert("Successfully added")
+  }
+
   render() {
     return (
       <View style={styles.container}>
@@ -40,17 +44,15 @@ export default class DetailScreen extends React.Component  {
             <Text style={{color:'#FF914D'}}>Available</Text>
           </View>
             <Text style={styles.textPrice}>$3.5</Text>
-           <Text style={styles.textName}>Cap</Text>
+           <Text style={styles.textName}>Cappacino</Text>
           <Text style={styles.textDetail}>Cappacino is hot frothy milk coffee. It has alot of foam in it. </Text>
-{/* 
-          <Text style={styles.textPrice}>{this.props.navigation.state.params.price}</Text>
-          <Text numberOfLines={2} style={styles.textName}>{this.props.navigation.state.params.name.toUpperCase()}</Text>
-          <Text  style={styles.textDetail}>The template details auto text code displays the complete template details, including attribute details and metric details.</Text>
-   */}
+
+          {/* <Text style={styles.textPrice}>{this.props.navigation.state.params.price}</Text>
+          <Text numberOfLines={2} style={styles.textName}>{this.props.navigation.state.params.name.toUpperCase()}</Text> */}
 
           <TouchableOpacity 
           style={{backgroundColor:"#FF914D", justifyContent:'center', alignItems:'center', marginTop:40, paddingVertical:10, borderRadius:50}}
-          onPress={()=>this.onClickAddCart(item)}
+          onPress={()=>this.onClickAddCart()}
           >
             <Text style={styles.textOrder}>Add to Cart</Text>
             </TouchableOpacity>

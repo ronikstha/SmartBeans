@@ -22,8 +22,8 @@ export function DrawerContent(props) {
                             }}
                             size={50}  />
                             <View style={{marginLeft:15, flex: 'colomn'}}>
-                                <Title style={styles.title}>Ronik Shrestha</Title>
-                                <Caption style={styles.caption}>@ron_stha</Caption> 
+                                <Title style={styles.title}>User 1</Title>
+                                <Caption style={styles.caption}>user1@email.com</Caption> 
                             </View>
                         </View>
 

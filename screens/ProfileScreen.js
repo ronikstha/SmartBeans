@@ -16,15 +16,15 @@ export default class ProfileScreen extends React.Component {
 
               <View style={{ alignSelf: "center" }}>
                   <View style={styles.profileImage}>
-                      <Image source={require("../assets/images/cap.png")} style={styles.image} resizeMode="center"></Image>
+                      <Image source={require("../assets/images/user.png")} style={styles.image} resizeMode="center"></Image>
                   </View>
                   <View style={styles.add}>
                       <Ionicons name="ios-add" size={48} color="#DFD8C8" style={{ marginTop: 6, marginLeft: 2 }}></Ionicons>
                   </View>
               </View>
               <View style={styles.infoContainer}>
-                  <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>Ronik</Text>
-                  <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>ronik@gmail.com</Text>
+                  <Text style={[styles.text, { fontWeight: "200", fontSize: 36 }]}>User</Text>
+                  <Text style={[styles.text, { color: "#AEB5BC", fontSize: 14 }]}>user1@email.com</Text>
               </View>
 
               <View style={styles.statsContainer}>
@@ -37,7 +37,7 @@ export default class ProfileScreen extends React.Component {
                       <Text style={[styles.text, styles.subText]}>Balance</Text>
                   </View>
                   <View style={styles.statsBox}>
-                      <Text style={[styles.text, { fontSize: 24 }]}>22</Text>
+                      <Text style={[styles.text, { fontSize: 24 }]}>3</Text>
                       <Text style={[styles.text, styles.subText]}>Total Orders</Text>
                   </View>
               </View>
@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
       borderRadius: 10
   },
   add: {
-      backgroundColor: "#41444B",
+      backgroundColor: '#FF914D',
       position: "absolute",
       bottom: 0,
       right: 0,

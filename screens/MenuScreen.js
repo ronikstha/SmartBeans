@@ -38,14 +38,34 @@ var data =
     price: "$3.5"
 },
 {
-    name:'Iced Latte',
-    image: require("../assets/images/iced-latte.png"),
+    name:'Espresso',
+    image: require("../assets/images/espresso.jpeg"),
     price: "$5.5"
 },
 {
   name:'Iced Latte',
   image: require("../assets/images/iced-latte.png"),
   price: "$5.5"
+},
+{
+  name:'Iced Long Black',
+  image: require("../assets/images/iced-black.png"),
+  price: "$5.5"
+},
+{
+  name:'Iced Lemonade',
+  image: require("../assets/images/lemon.jpg"),
+  price: "$5.5"
+},
+{
+  name:'Chocolate Shake',
+  image: require("../assets/images/chocolate.jpeg"),
+  price: "$6.5"
+},
+{
+  name:'Water Bottle',
+  image: require("../assets/images/water.jpeg"),
+  price: "$2.5"
 },
 ]
 
